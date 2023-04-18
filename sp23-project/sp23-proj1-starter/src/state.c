@@ -380,7 +380,7 @@ game_state_t* load_board(char* filename) {
   }
 
   fclose(fp);
-  
+
   return state;
 }
 
@@ -399,22 +399,14 @@ static void find_head(game_state_t* state, unsigned int snum) {
   unsigned int col = snake->tail_col;
   char ch = get_board_at(state, row, col);
 
-
-  while (is_snake(ch)) {
-    unsigned int next_row = get_next_row(row, ch);
-    unsigned int next_col = get_next_col(col, ch);
-    char next_ch = get_board_at(state, next_row, next_col);
-    
-    if (!is_snake(next_ch)) {
-      snake->head_row = row;
-      snake->head_col = col;
-      break;
-    } else {
-      row = next_row;
-      col = next_col;
-      ch = next_ch;
-    }
+  while (!is_head(ch)) {
+    row = get_next_row(row, ch);
+    col = get_next_col(col, ch);
+    ch = get_board_at(state, row, col);
   }
+
+  snake->head_row = row;
+  snake->head_col = col;
 
   return;
 }
