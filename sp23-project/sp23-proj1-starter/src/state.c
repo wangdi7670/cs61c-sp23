@@ -336,6 +336,12 @@ void update_state(game_state_t* state, int (*add_food)(game_state_t* state)) {
 /* Task 5 */
 game_state_t* load_board(char* filename) {
   // TODO: Implement this function.
+  FILE *fp = fopen(filename, "r");
+  if (fp == NULL) {
+    printf("Failed to open file.\n");
+    return NULL;
+  }
+
   game_state_t* state = malloc(sizeof(game_state_t));
   state->num_snakes = 0;
   state->snakes = NULL;
@@ -347,12 +353,6 @@ game_state_t* load_board(char* filename) {
   unsigned int length = 5;
   state->board = malloc((row+1) * sizeof(char *));
   state->board[0] = calloc(length, sizeof(char));
-
-  FILE *fp = fopen(filename, "r");
-  if (fp == NULL) {
-    printf("Failed to open file.\n");
-    return NULL;
-  }
 
   char ch;
   while ((ch = (char) fgetc(fp)) != EOF) {
@@ -378,6 +378,9 @@ game_state_t* load_board(char* filename) {
   } else {
     state->num_rows = row + 1;
   }
+
+  fclose(fp);
+  
   return state;
 }
 
