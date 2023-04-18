@@ -100,6 +100,22 @@ bool test_is_vowel() {
 
 bool test_is_tail() {
   // TODO: Implement this function.
+  char c1 = 'w';
+  char c2 = 'a', c3 = 's', c4 = 'd';
+  char c5 = 'W', c6 = 'S', c7 = 'x', c8 = '>';
+  bool ans;
+  ans = assert_true("w", is_tail(c1));
+  ans &= assert_true("a", is_tail(c2));
+  ans &= assert_true("s", is_tail(c3));
+  ans &= assert_true("d", is_tail(c4));
+
+  ans &= assert_false("W", is_tail(c5));
+  ans &= assert_false("S", is_tail(c6));
+  ans &= assert_false("x", is_tail(c7));
+  ans &= assert_false(">", is_tail(c8));
+  if (!ans) {
+    return false;
+  }
   return true;
 }
 
