@@ -373,13 +373,9 @@ game_state_t* load_board(char* filename) {
     }
   }
 
-  if (col == 0) {
-    state->num_rows = row;
-  } else {
-    state->num_rows = row + 1;
-  }
-
   fclose(fp);
+  state->num_rows = row;
+  free(state->board[row]);
 
   return state;
 }
