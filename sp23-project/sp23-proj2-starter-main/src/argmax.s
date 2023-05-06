@@ -48,7 +48,7 @@ loop_start:
 loop_continue:
     bge t1 s2 loop_end
     slli t2 t1 2  # i * 4
-    add t2 s0 t2
+    add t2 s1 t2
     lw t2 0(t2)  # t2 = arr[i]
     bge s0 t2 if_end
 if_label:
